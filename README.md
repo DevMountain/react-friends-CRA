@@ -421,3 +421,8 @@ class Friend extends React.Component {
 
 export default Friend;
 ```
+
+As the final touch, we need to add sorting and filtering. For this we will use plain JavaScript.
+
+* Using the values we have stored on our FriendList component's state and built in array methods sort, filter, and reverse the array of Friend components as expected.
+    * **Warning:** JavaScript's built in `.sort` does not reliably sort in Chrome. Either test in another browser or find a different sorting algorithim.
