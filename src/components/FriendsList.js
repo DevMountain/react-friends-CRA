@@ -1,5 +1,9 @@
 import React from "react";
 
+import friends from "../../friends";
+
+import Friend from "./Friend";
+
 class FriendsList extends React.Component {
 	constructor( props ) {
 		super( props );
@@ -16,6 +20,17 @@ class FriendsList extends React.Component {
 	}
 
 	render() {
+		const friendsList = friends.map( friend => (
+			<Friend
+				currentLocation={ friend.current_location || {} }
+				friendCount={ friend.friend_count }
+				key={ friend.$$hashKey }
+				name={ friend.name }
+				pictureUrl={ friend.pic_square }
+				status={ friend.status ? friend.status.message : "" }
+			/>
+		) );
+
 		return (
 			<div>
 				<form
@@ -53,6 +68,7 @@ class FriendsList extends React.Component {
 				</form>
 
 				<ul>
+					{ friendsList }
 				</ul>
 			</div>
 		);

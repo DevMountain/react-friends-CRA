@@ -320,5 +320,104 @@ class FriendsList extends React.Component {
 }
 
 export default FriendsList;
+```
 
+___
+
+### Step 3: Friend Component, repeating, filtering.
+
+Create a new file named `Friend.js` and follow the usual steps for creating a class with a render method that returns the following JSX:
+
+``` jsx
+<li className='friend'>
+	<img className="profile-pic" src='http://placebear.com/50/50.jpg' />
+
+		<h3>Cali Fornia</h3>
+
+		<div className="location">
+			Location: New Port Beach, California, United States
+		</div>
+
+		<div className="status">
+			Status: I hate the snow. I wish I was on the beach right now!!! <span className="hashtag">#ihateprovo</span>
+		</div>
+
+		<div className="num-friends">
+			Friends: 1,367
+		</div>
+</li>
+```
+
+* Import `Friend` into `FriendsList` and place it inside the `ul` tag at the bottom.
+	* You should now see a single friend listed, but we want to display our whole list!
+* First we need our data, import `friends.js` into `FriendList.js` and save it to a variable named `friends`.
+* At the top of the render method `map` over the array of friends to create an array of `Friend` components, passing in `friend.name`, `friend.pic_square`, `friend.status`, `friend.friend_count`, and `friend.current_location` as props.
+	* Don't forget that every repeated item in React needs a unique `key`. `friend.$$hashKey` would work well for this.
+	* Be careful of null values!
+* Adjust `Friend.js` to use `this.props` instead of the static data we included in our original JSX.
+	
+**Checkpoint:** You should now be displaying a large list of friends. Your code should look something like this:
+
+``` jsx
+// FriendsList.js
+import React from "react";
+
+import friends from "../../friends";
+
+import Friend from "./Friend";
+
+class FriendsList extends React.Component {
+
+// ...
+    render() {
+		const friendsList = friends.map( friend => (
+			<Friend
+				currentLocation={ friend.current_location || {} }
+				friendCount={ friend.friend_count }
+				key={ friend.$$hashKey }
+				name={ friend.name }
+				pictureUrl={ friend.pic_square }
+				status={ friend.status ? friend.status.message : "" }
+			/>
+		) );
+        
+        return (
+            // ...
+            <ul>
+                { friendsList }
+            </ul>
+        );
+    }
+    // ...
+```
+
+``` jsx
+// Friend.js
+import React from "react";
+
+class Friend extends React.Component {
+	render() {
+		return (
+			<li className='friend'>
+				<img className="profile-pic" src={ this.props.pictureUrl } />
+
+					<h3>{ this.props.name }</h3>
+
+					<div className="location">
+						Location: { this.props.currentLocation.city }, { this.props.currentLocation.state }, { this.props.currentLocation.country }
+					</div>
+
+					<div className="status">
+						{ this.props.status }
+					</div>
+
+					<div className="num-friends">
+						{ this.props.friendCount }
+					</div>
+			</li>
+		);
+	}
+}
+
+export default Friend;
 ```
