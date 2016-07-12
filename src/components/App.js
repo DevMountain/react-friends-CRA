@@ -1,5 +1,7 @@
 import React from "react";
 
+import FriendsList from "./FriendsList";
+
 class App extends React.Component {
 	render() {
 		return (
@@ -7,7 +9,7 @@ class App extends React.Component {
 				<h1>The <strong>facebook</strong> Friend Machine</h1>
 
 				<div className="friends">
-
+					<FriendsList />
 				</div>
 			</div>
 		);

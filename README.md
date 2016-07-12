@@ -190,7 +190,9 @@ Your `FriendsList` class should now look something like this:
 import React from "react";
 
 class FriendsList extends React.Component {
-	constructor() {
+	constructor( props ) {
+	    super( props );
+	    
 		this.state = {
 			  searchText: ""
 			, orderBy: "name"
@@ -223,6 +225,84 @@ class FriendsList extends React.Component {
 
 						<select
 							className="input-medium"
+							value={ this.state.ascending }
+						>
+							<option value={ false }>Descending</option>
+							<option value={ true }>Ascending</option>
+						</select>
+
+					</div>
+				</form>
+
+				<ul>
+				</ul>
+			</div>
+		);
+	}
+}
+
+export default FriendsList;
+
+```
+
+To test this component we'll need to import it into `App.js` and add the component inside of the div with the class of "friends". Because we haven't yet added an `onChange` handler none of these values are editable, so let's fix that!
+
+* Begin by creating a new method on the `FriendsList` class named `handleChange`.
+	* This method should take in two parameters, `field` and `event`.
+	* When called, the method should use React's `setState` method to change the value of the correct property on state to `event.target.value`.
+* Next we need to add `onChange` properties to our select and input elements, passing in our `handleChange` method.
+	* Don't forget to use `bind` to preserve the context of `this`!
+	* Make sure `onChange`'s `field` parameter matches the field on state that you want to change.
+
+
+**Checkpoint:** You should now be able to make changes to your search field and select boxes and have that value placed on `FriendsList`'s `state`. Your code should look something like this:
+
+``` jsx
+import React from "react";
+
+class FriendsList extends React.Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			  searchText: ""
+			, orderBy: "name"
+			, ascending: true
+		};
+	}
+
+	handleChange( field, event ) {
+		this.setState( { [ field ]: event.target.value } );
+	}
+
+	render() {
+		return (
+			<div>
+				<form
+					className="form-inline searchForm"
+					role="form"
+				>
+					<div className="form-group">
+
+						<input
+							className="form-control"
+							onChange={ this.handleChange.bind( this, "searchText" ) }
+							placeholder="Search Anything About Your Friends"
+							value={ this.state.searchText }
+						/>
+
+						<select
+							className="input-medium"
+							onChange={ this.handleChange.bind( this, "orderBy" ) }
+							value={ this.state.orderBy }
+						>
+							<option value="name">Name</option>
+							<option value="friend_count">#Friends</option>
+						</select>
+
+						<select
+							className="input-medium"
+							onChange={ this.handleChange.bind( this, "ascending" ) }
 							value={ this.state.ascending }
 						>
 							<option value={ false }>Descending</option>

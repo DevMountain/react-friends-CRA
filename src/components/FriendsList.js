@@ -1,12 +1,18 @@
 import React from "react";
 
 class FriendsList extends React.Component {
-	constructor() {
+	constructor( props ) {
+		super( props );
+
 		this.state = {
 			  searchText: ""
 			, orderBy: "name"
 			, ascending: true
 		};
+	}
+
+	handleChange( field, event ) {
+		this.setState( { [ field ]: event.target.value } );
 	}
 
 	render() {
@@ -20,12 +26,14 @@ class FriendsList extends React.Component {
 
 						<input
 							className="form-control"
+							onChange={ this.handleChange.bind( this, "searchText" ) }
 							placeholder="Search Anything About Your Friends"
 							value={ this.state.searchText }
 						/>
 
 						<select
 							className="input-medium"
+							onChange={ this.handleChange.bind( this, "orderBy" ) }
 							value={ this.state.orderBy }
 						>
 							<option value="name">Name</option>
@@ -34,6 +42,7 @@ class FriendsList extends React.Component {
 
 						<select
 							className="input-medium"
+							onChange={ this.handleChange.bind( this, "ascending" ) }
 							value={ this.state.ascending }
 						>
 							<option value={ false }>Descending</option>
