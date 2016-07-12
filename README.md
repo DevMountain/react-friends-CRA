@@ -1,11 +1,11 @@
-### React Friends
+## React Friends
 
-#### Objectives
+### Objectives
 Learn the basics of React and see how its implementation compares to Angular.
 
 ___
 
-#### Step 1: Dependencies, file structure, and building.
+### Step 1: Dependencies, file structure, and building.
 
 Get started by cloning this repo and familiarizing yourself with the file structure.
 
@@ -56,6 +56,12 @@ We'll start by using npm to install all of the dependencies necessary for our pr
 
 ___
 
-#### Step 2: Components
+### Step 2: Components
 
+Provided is an image breaking down the individual components of our application.
 
+* Red - The wrapper component of our entire application
+* Green - This component contains the friends list and search fields
+* Yellow - Each individual friend will also be a component
+
+![alt text](https://raw.githubusercontent.com/DevMountain/react-friends/solution/components.png, "Preview Image")
