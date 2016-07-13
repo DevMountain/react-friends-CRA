@@ -156,7 +156,7 @@ With our header displaying and our app component ready for some child components
 	<form className="form-inline searchForm" role="form">
 		<div className="form-group">
 
-			<input className="form-control" placeholder="Search Anything About Your Friends" />
+			<input className="form-control" placeholder="Search For Friends" />
 
             <select className="input-medium">
                 <option>Name</option>
@@ -180,7 +180,7 @@ With our header displaying and our app component ready for some child components
 * The component's state should have three properties:
     * `searchText` - Initially an empty string
     * `orderBy` - Initially the string `"name"`
-    * `ascending` - Initially the boolean `true`
+    * `order` - Initially the string `"ascending"`
 * Assign the above sections of the component's state to the appropriate input and select fields.
 * Add appropriate values to each option.
 
@@ -196,7 +196,7 @@ class FriendsList extends React.Component {
 		this.state = {
 			  searchText: ""
 			, orderBy: "name"
-			, ascending: true
+			, order: "ascending"
 		};
 	}
 
@@ -211,7 +211,7 @@ class FriendsList extends React.Component {
 
 						<input
 							className="form-control"
-							placeholder="Search Anything About Your Friends"
+							placeholder="Search Anything For Friends"
 							value={ this.state.searchText }
 						/>
 
@@ -225,10 +225,10 @@ class FriendsList extends React.Component {
 
 						<select
 							className="input-medium"
-							value={ this.state.ascending }
+							value={ this.state.order }
 						>
-							<option value={ false }>Descending</option>
-							<option value={ true }>Ascending</option>
+							<option value="descending">Descending</option>
+							<option value="ascending">Ascending</option>
 						</select>
 
 					</div>
@@ -267,7 +267,7 @@ class FriendsList extends React.Component {
 		this.state = {
 			  searchText: ""
 			, orderBy: "name"
-			, ascending: true
+			, order: "ascending"
 		};
 	}
 
@@ -287,7 +287,7 @@ class FriendsList extends React.Component {
 						<input
 							className="form-control"
 							onChange={ this.handleChange.bind( this, "searchText" ) }
-							placeholder="Search Anything About Your Friends"
+							placeholder="Search For Friends"
 							value={ this.state.searchText }
 						/>
 
@@ -302,11 +302,11 @@ class FriendsList extends React.Component {
 
 						<select
 							className="input-medium"
-							onChange={ this.handleChange.bind( this, "ascending" ) }
-							value={ this.state.ascending }
+							onChange={ this.handleChange.bind( this, "order" ) }
+							value={ this.state.order }
 						>
-							<option value={ false }>Descending</option>
-							<option value={ true }>Ascending</option>
+							<option value={ "descending" }>Descending</option>
+							<option value={ "ascending" }>Ascending</option>
 						</select>
 
 					</div>
@@ -425,4 +425,54 @@ export default Friend;
 As the final touch, we need to add sorting and filtering. For this we will use plain JavaScript.
 
 * Using the values we have stored on our FriendList component's state and built in array methods sort, filter, and reverse the array of Friend components as expected.
-    * **Warning:** JavaScript's built in `.sort` does not reliably sort in Chrome. Either test in another browser or find a different sorting algorithim.
+    * **Warning:** JavaScript's built in `.sort` does not reliably sort in Chrome. Either test in another browser or find a different sorting algorithm.
+    * Your code should look something like this:
+    
+``` jsx
+// FriendsList.js
+
+// ...
+const friendsList = friends
+	.filter( friend => friend.name.toLowerCase().indexOf( this.state.searchText.toLowerCase() ) !== -1 )
+	.sort( ( a, b ) => a[ this.state.orderBy ] > b[ this.state.orderBy ] )
+	.map( friend => (
+		<Friend
+			currentLocation={ friend.current_location || {} }
+			friendCount={ friend.friend_count }
+			key={ friend.$$hashKey }
+			name={ friend.name }
+			pictureUrl={ friend.pic_square }
+			status={ friend.status ? friend.status.message : "" }
+		/>
+	) );
+
+const displayFriends = this.state.order === "ascending" ? friendsList : friendsList.slice().reverse();
+
+// ...
+```
+
+___
+
+### Black Diamonds:
+
+* Currently we are only searching by name. Create a select that allows users to choose what to search by.
+* Update the UI so that Friend components without location data do not display two empty commas.
+
+
+## Contributions
+
+### Contributions
+
+#### 
+ 
+If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
+
+## Copyright
+
+### Copyright
+
+#### 
+
+© DevMountain LLC, 2015. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
+
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250">

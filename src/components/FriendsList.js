@@ -11,7 +11,7 @@ class FriendsList extends React.Component {
 		this.state = {
 			  searchText: ""
 			, orderBy: "name"
-			, ascending: true
+			, order: "ascending"
 		};
 	}
 
@@ -34,8 +34,7 @@ class FriendsList extends React.Component {
 				/>
 			) );
 
-		const displayFriends = this.state.ascending ? friendsList : friendsList.slice().reverse();
-		console.log( this.state.ascending, [ 1, 2, 3 ].reverse() );
+		const displayFriends = this.state.order === "ascending" ? friendsList : friendsList.slice().reverse();
 
 		return (
 			<div>
@@ -48,7 +47,7 @@ class FriendsList extends React.Component {
 						<input
 							className="form-control"
 							onChange={ this.handleChange.bind( this, "searchText" ) }
-							placeholder="Search Anything About Your Friends"
+							placeholder="Search For Friends"
 							value={ this.state.searchText }
 						/>
 
@@ -63,11 +62,11 @@ class FriendsList extends React.Component {
 
 						<select
 							className="input-medium"
-							onChange={ this.handleChange.bind( this, "ascending" ) }
-							value={ this.state.ascending }
+							onChange={ this.handleChange.bind( this, "order" ) }
+							value={ this.state.order }
 						>
-							<option value={ false }>Descending</option>
-							<option value={ true }>Ascending</option>
+							<option value={ "descending" }>Descending</option>
+							<option value={ "ascending" }>Ascending</option>
 						</select>
 
 					</div>
