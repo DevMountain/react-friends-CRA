@@ -7,53 +7,37 @@ ___
 
 ### Step 1: Dependencies, file structure, and building.
 
-Get started by cloning this repo and familiarizing yourself with the file structure.
+Get started by cloning this repo.
+
+We'll use `create-react-app` to make our app.
+
+1. **`npm install -g create-react-app`**
+
+2. Then run the command `create-react-app friends` inside of your cloned repo.
+
+3. This will make a react app in the directory friends. `cd friends` to enter that directory.
+
+4. Run `npm start`, and you should see your basic react app spring up in the browser.
+
+**Let's take a look at our basic react app**
 
 ```
-react-friends/
--- dist/ /* this folder will contain all of the code we want available in the browser. */
----- index.html
-
--- src/ /* this folder will contain all of our pre-production code (code that hasn't yet been run through a build system). The majority of our work will happen here */
----- components/ /* React follows a component based architecture, this is the folder where we will be storing all of our components */
----- index.js /* This is the entry point of our application; the file to which everything will be connected */
----- styles.css
-
--- .babelrc /* We are using Babel alongside Webpack to compile our JSX/ES2015 into something browser-readable. This is where Babel is configured. */
--- webpack.config.js /* Webpack is the de facto build tool for React. A pre-built config has been provided but I highly recommend familiarizing yourself with it.
+- node_modules // create-react-app installed a bunch of dependencies for us
+- public
+  \
+   - index.html // This is the html file that our react app will use
+- src
+  \
+   - App.css
+   - App.js // This is where our react code begins
+   - App.test.js // This is a test file we can ignore
+   - Index.js // This is where our react app is initially renderd
+   - Index.css
 ```
 
-We'll start by using npm to install all of the dependencies necessary for our project. Don't forget to `npm init` before trying to install!
+`create-react-app` has given us the basic "boilerplate" of our app. Now we can start working in this directory.
 
-**Dev-Dependencies** ( `npm i --save-dev` )
-
-* `webpack`
-    * The module bundler we will be using as a build tool for this project.
-    * If you haven't already, you will also want to install this globally ( `npm i webpack -g` )
-* `webpack-dev-server`
-    * A tool built for Webpack to allow live page reloads whenever a change is made.
-    * If you haven't already, you will also want to install this globally ( `npm i webpack-dev-server -g` )
-* `babel-core`
-    * The core of Babel's parser
-* `babel-preset-es2015`
-    * A Babel preset allowing us to compile ES2015 to ES5
-* `babel-preset-react`
-    * A Babel preset allowing us to parse JSX
-* `babel-loader`
-    * Babel's Webpack plugin
-* `style-loader`
-* `css-loader`
-    * These allow Webpack to handle our CSS as well as our JS
-    
-**Standard Dependencies** ( `npm i --save` )
-
-* `react`
-    * The core React library
-* `react-dom`
-    * The entry point of working with the DOM in React
-    
-**Checkpoint:** You should now be able to run `webpack-dev-server -d` and navigate a browser window to http://localhost:8080.
-
+**Checkpoint:** You should be able to see your "boilerplate" react app in your browser.**
 ___
 
 ### Step 2: Components
@@ -64,12 +48,12 @@ Provided in `components.png` is an image breaking down the individual components
 * Green - This component contains the friends list and search fields
 * Yellow - Each individual friend will also be a component
 
-We'll start in `index.js`, remember to check Webpack in your terminal for errors regularly!
+We'll start in `index.js`, remember to check in your terminal for errors regularly!
 
 * Start by importing React and ReactDOM, we'll need these to render our application into the DOM.
 * Using ReactDOM's `render` method, render an `<h1>Hello from index.js!</h1>` onto the div with the id of `react-node`
     * Note that it is good practice to wrap this in a `document.addEventListener( "DOMContentLoaded", () => { //...` to ensure the application doesn't try to mount before the HTML document is ready.
-* Import `styles.css` ( no need to save it to a variable ) so that Webpack will handle our styles as well.
+* Import `styles.css` ( no need to save it to a variable ) so that create-react-app will add our styles to our components.
     
 **Checkpoint:** You should now be able to navigate to http://localhost:8080 and see a header with the text "Hello from index.js!". Your code should look something like this:
 
