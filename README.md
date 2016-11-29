@@ -48,38 +48,19 @@ Provided in `components.png` is an image breaking down the individual components
 * Green - This component contains the friends list and search fields
 * Yellow - Each individual friend will also be a component
 
-We'll start in `index.js`, remember to check in your terminal for errors regularly!
+First let's remove some stuff. Whenever you use `create-react-app`, you'll want to remove the boilerplate
+code they add that you don't need.
 
-* Start by importing React and ReactDOM, we'll need these to render our application into the DOM.
-* Using ReactDOM's `render` method, render an `<h1>Hello from index.js!</h1>` onto the div with the id of `react-node`
-    * Note that it is good practice to wrap this in a `document.addEventListener( "DOMContentLoaded", () => { //...` to ensure the application doesn't try to mount before the HTML document is ready.
-* Import `styles.css` ( no need to save it to a variable ) so that create-react-app will add our styles to our components.
-    
-**Checkpoint:** You should now be able to navigate to http://localhost:8080 and see a header with the text "Hello from index.js!". Your code should look something like this:
+* Delete the following files:
+  * `src/App.test.js`
+  * `src/logo.svg`
+* in `App.js`, remove the line `import logo from './logo.svg';`
 
-``` jsx
-// index.js
-import React from "react";
-import ReactDOM from "react-dom";
+Now that we have removed unnecessary code, we can start building our first component. 
+Open `App.js`.
 
-import "./styles.css"
 
-document.addEventListener( "DOMContentLoaded", () => {
-	const reactNode = document.getElementById( "react-node" );
-    
-    if ( reactNode ) {
-        ReactDOM.render(
-            <h1>Hello from index.js!</h1>
-            , reactNode )
-    }
-} );
-```
-
-Now that we are set up and rendering, we can start building our first component. Create a new file inside of the `components/` directory named `App.js` and open it up. This will be the root component of our application.
-
-* Start by importing React ( we won't need ReactDOM here! )
-* Next create a new class named `App` that inherits from `React.Component`.
-* Create a `render` method on `App` that returns the following JSX:
+* Inside the render method, replace **all** the existing JSX with this code:
 
 ``` jsx
 <div>
@@ -91,41 +72,43 @@ Now that we are set up and rendering, we can start building our first component.
 </div>
 ```
 
-* At the bottom of the page export `App` as the default export.
-* Import `App` to `index.js` and replace our current `<h1>` with the App component.
-
 **Checkpoint:** Your browser should now be displaying a styled header of "The **facebook** Friend Machine". The code should look something like this:
 
 ``` jsx
 // index.js
- // ...
-	if ( reactNode ) {
-		ReactDOM.render(
-			<App />
-			, reactNode )
-	}
-} );
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+
 ```
 
 ``` jsx
 // App.js
-import React from "react";
+import React, { Component } from 'react';
+import './App.css';
 
-class App extends React.Component {
-	render() {
-		return (
-			<div>
+class App extends Component {
+  render() {
+    return (
+      <div>
 				<h1>The <strong>facebook</strong> Friend Machine</h1>
 
 				<div className="friends">
 
 				</div>
 			</div>
-		);
-	}
+    );
+  }
 }
 
 export default App;
+
 
 ```
 
@@ -133,7 +116,10 @@ ___
 
 With our header displaying and our app component ready for some child components, we can start building the next component: `FriendsList.js`
 
-* Start by setting up `FriendsList.js` the same as `App` was; an exported class inheriting from `React.Component` with a `render` method that returns the following JSX:
+* Let's keep all our next components inside of a directory in `src` called `components`.
+* Make a file called `FriendsList.js` inside of `components`.
+* Set up `FriendsList.js` the same as `App` was; an exported class inheriting from `React.Component` 
+  with a `render` method that returns the following JSX:
 
 ```
 <div>
@@ -162,11 +148,25 @@ With our header displaying and our app component ready for some child components
 
 * This component will need internal state, which means it needs a `constructor`.
 * The component's state should have three properties:
-    * `searchText` - Initially an empty string
-    * `orderBy` - Initially the string `"name"`
-    * `order` - Initially the string `"ascending"`
-* Assign the above sections of the component's state to the appropriate input and select fields.
-* Add appropriate values to each option.
+    * `searchText` - Initially an empty string, used to search for friends.
+    * `orderBy` - Initially the string `"name"`, used to set what we sort our friends by
+    * `order` - Initially the string `"ascending"`, used to set the sorting order.
+* Look at the HTML code in your `FriendsList` component. Each piece of the state corresponds to
+  a specific input or select. Use the `value` attribute to bind the value from that piece of state
+  to that part of the HTML, like so:
+  ```
+  <input
+    value={this.state.foo}
+  />
+  ```
+* Each option inside of a select needs to be bound to a value. Looking at the values in `friends.js`,
+  bind a property from each friend to a specific option. For example:
+  ```
+  <select>
+    <option value="name">Name</option>
+  </select>
+  ```
+  This will create a drop down selector with a single option of Name, bound to the name value.
 
 Your `FriendsList` class should now look something like this:
 
