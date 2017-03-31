@@ -57,7 +57,7 @@ Here's a breakdown of what our app's component structure will look like:
 
 **Summary**
 
-In this step we'll clean up the boilerplate a bit, update our `App` component, and create the first child component.
+In this step we'll clean up the boilerplate, lay out the basic structure of the application, and create our first child component. We'll handle user input to lay the groundwork for being able to search and sort friends.
 
 **Detailed instructions**
 
