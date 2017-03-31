@@ -4,6 +4,8 @@
 
 **Project Summary**
 
+<img src="https://raw.githubusercontent.com/DevMountain/react-friends-CRA/master/solution.PNG" />
+
 In this project we'll be creating a faux social network in React. Covering the basics of create-react-app, React, components, and interactivity.
 
 ### Step 1: Dependencies, file structure, and building.
