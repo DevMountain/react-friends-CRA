@@ -4,6 +4,8 @@
 
 **Project Summary**
 
+<img src="https://raw.githubusercontent.com/DevMountain/react-friends-CRA/master/solution.PNG" />
+
 In this project we'll be creating a faux social network in React. Covering the basics of create-react-app, React, components, and interactivity.
 
 ### Step 1: Dependencies, file structure, and building.
@@ -55,7 +57,7 @@ Here's a breakdown of what our app's component structure will look like:
 
 **Summary**
 
-In this step we'll clean up the boilerplate a bit, update our `App` component, and create the first child component.
+In this step we'll clean up the boilerplate, lay out the basic structure of the application, and create our first child component. We'll handle user input to lay the groundwork for being able to search and sort friends.
 
 **Detailed instructions**
 
