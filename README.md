@@ -76,14 +76,14 @@ code that you don't need.
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 
 body, html, h1, h2, h3, h4, h5, h6, ul{
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 }
 
 h1{
     text-align: center;
-    padding: 20px 0px;
+    padding: 20px 0;
     margin-bottom: 20px;
     background-color: #3b5998;
     color: white;
@@ -103,8 +103,20 @@ input, select, form, ul {
     text-align: center;
 }
 
-.friends{
+.form-group .form-control {
+    display: block;
+}
 
+select {
+    width: 45%;
+}
+
+select:nth-of-type(1) {
+    float: left;
+}
+
+select:nth-of-type(2) {
+    float: right;
 }
 
 .friends ul{
@@ -129,7 +141,7 @@ input, select, form, ul {
     text-align: left;
     border: 1px solid #ccc;
     padding: 15px;
-    margin: 2px 0px;
+    margin: 2px 0;
 }
 
 .friend h3 {
